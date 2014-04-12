@@ -1,0 +1,58 @@
+<title>Basic Widgets</title>
+
+<h1> Basic Widgets </h1>
+<a href = "http://www.tkdocs.com/tutorial/widgets.html"> Website </a>
+
+<p> Widget Types: </p>
+<ul>
+<li>Frame </li>
+<li> Label </li>
+<li> Button </li>
+<li> Checkbutton </li>
+<li> Radiobutton </li>
+<li> Entry </li>
+<li> Combo Box </li>
+<hr>
+
+<h2> Frame </h2>
+<a href = "http://effbot.org/tkinterbook/frame.htm"> Good Link on Frames </a>
+<p> A frame is a widget that displays just as a simple rectangle. Frames are primarily used as a container for other widgets, which are under the control of a geometry manager such as grid.</p> <br>
+
+<p> The code for a frame is: </p>
+
+<code> frame = ttk.frame (parent) </code>
+
+<h3> Size </h3>
+
+<p> The size is controlled by the geometry manager automatically, if you want to take over you do this: </p>
+
+<code> separator = frame(height=2) </code>
+
+<h3> Padding </h3>
+
+<p> The "padding" configuration option is used to request extra space around the inside of the widget; this way if you're putting other widgets inside the frame, there will be a bit of a margin all the way around. </p>
+
+<code> frame['padding'] = (5,10) </code>
+
+<h3> Boarders </h3>
+
+<p> You can display a border around the frame widget; you see this a lot where you might have a part of the user interface looking "sunken" or "raised" in relation to its surroundings. To do this, you need to set the "borderwidth" configuration option (which defaults to 0, so no border), as well as the "relief" option, which specifies the visual appearance of the border: "flat" (default), "raised", "sunken", "solid", "ridge", or "groove". </p>
+
+<code> frame['borderwidth'] = 2 <br> 
+frame['relief'] = 'sunken'</code>
+
+<hr>
+
+<h2> Label </h2>
+
+<p> A label, is well, a label. Displays text and images. </p>
+
+<code> label = ttk.Label(parent, text='Full name:')</code>
+
+<h3> Displaying Images</h3>
+
+<p>  This is a two-step process, first creating an image "object", and then telling the label to use that object via its "image" configuration option: </p>
+
+<code> image = PhotoImage(file='myimage.gif') <br>
+label['image'] = image </code>
+

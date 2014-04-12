@@ -1,0 +1,98 @@
+<title>TK Concepts</title>
+<h1> Tk Concepts </h1>
+<a href = "http://www.tkdocs.com/tutorial/concepts.html"> Link to page </a>
+<hr>
+<h2>Root</h2>
+<img src="http://www.tkdocs.com/images/hierarchy.png">
+
+<h2> Widget</h2>
+<p> Each separate widget is a Python object.
+When creating a widget, you must pass its parent as a parameter to the widget creation function. </br>
+The only exception is the "root" window, which is the toplevel window that will contain everything else. That is automatically created, and it does not have a parent.</br>
+For example: </br></p>
+
+<code>
+root = Tk() </br>
+content = ttk.Frame(root) </br>
+button = ttk.Button(content) </br>
+</code>
+
+<p>
+Whether or not you save the widget object in a variable is entirely up to you, and depends of course whether you'll need to refer to it later. <br>
+
+Because the object is inserted into the widget hierarchy, it won't be garbage collected even if you don't keep your own reference to it.</p>
+
+<h2>Configuration Options</h2>
+<p> option examples: </br> </p>
+<ul>
+	<li>test</li>
+	<li>command</li>
+</ul>
+<p>Run</p> 
+<code>nameofwidget.configure()</code>
+<p> to get the options. </p>
+
+<h2> Geometry Management </h2>
+
+<p> Having things actually put in the onscreen window, </br> and precisely where in the window they show up is a separate step called <strong>geometry management</strong></p>
+<a href = 'http://www.effbot.org/zone/tkinter-geometry.htm'> here is a page on geometry management in tkinter </a>
+<ul>
+	<li> grid </li>
+	<li> pack </li>
+	<li> place </li>
+
+</ul>
+
+<h3> Jobs of a Geometry Manager: </h3>
+<ul>
+	<li> widgets are too big, what to do?</li>
+	<li> to window is bigger than the widget, who gets the extra space? </li>
+	<li> when resized, what in the window changes? </li>
+	<li> How can widgets in different parts of the user interface be aligned with each other, to present a clean layout and match platform guidelines to do with inter-widget spacing? </li>
+	<li>For a complex user interface, which may have many frames nested in other frames nested in the window (etc.), how can all the above be accomplished, trading off the conflicting demands of different parts of the entire user interface? </li>
+</ul>
+
+<h3>How it Works?</h3>
+
+<p>Geometry management in Tk relies on the concept of master and slave widgets. A master is a widget, typically a toplevel window or a frame, which will contain other widgets, which are called slaves. You can think of a geometry manager as taking control of the master widget, and deciding what will be displayed within.
+
+The geometry manager will ask each slave widget for its natural size, or how large it would ideally like to be displayed. It then takes that information and combines it with any parameters provided by the program when it asks the geometry manager to manage that particular slave widget. In our example, we passed grid a "column" and "row" number for each widget, which indicated the relative position of the widget with respect to others, and also a "sticky" parameter to suggest how the widget should be aligned or possibly stretched. We also used "columnconfigure" and "rowconfigure" to indicate the columns and rows we'd like to have expand if there is extra space available in the window. Of course, all these parameters are specific to grid; other geometry managers would use different ones.
+
+The geometry manager takes all the information about the slaves, as well as the information about how large the master is, and uses its internal algorithms to determine the area each slave will be allocated (if any!). The slave is then responsible for drawing etc. within that particular rectangle. And of course, any time the size of the master changes (e.g. because the toplevel window was resized), the natural size of a slave changes (e.g. because we've changed the text in a label), or any of the geometry manager parameters change (e.g. like "row", "column", or "sticky") we repeat the whole thing. </p>
+
+
+
+<h2> Event Handling </h2>
+
+<ul>
+	<li>there is an event loop</li>
+	<li> Tk normally takes care of it for you </li>
+	<li>a callback is what happens when the command thing is run... i think</li>
+</ul>
+
+<h4> Event bindings </h4>
+
+<p> for events that don't have a command calback associated with them, you can use Tk's "bind" to capture any event, and then (like with callbacks) execute an arbitary peace of code </p>
+
+<code> from tkinter import * </br>
+from tkinter import ttk </br>
+root = Tk()</br>
+l =ttk.Label(root, text="Starting...")</br>
+l.grid()</br>
+l.bind('<Enter>', lambda e: l.configure(text='Moved mouse inside'))</br>
+l.bind('<Leave>', lambda e: l.configure(text='Moved mouse outside'))</br>
+l.bind('<1>', lambda e: l.configure(text='Clicked left mouse button'))</br>
+l.bind('<Double-1>', lambda e: l.configure(text='Double clicked'))</br>
+l.bind('<B3-Motion>', lambda e: l.configure(text='right button drag to %d,%d' % (e.x, e.y)))</br>
+root.mainloop()</br>
+</code>
+
+<p> <strong> Let's Break it down!</strong></p>
+
+<code>l.bind('<Enter>'), lambda e: l.confifgure (text = 'Moved mouse inside')) </code>
+
+<code>l.bind('<Leave>', lambda e: l.configure (text = 'moved mouse outside'))</code>
+
+<p> For these, when the mouse moves inside (#1) or outside (#2) the label displays the text the mouse moved inside or outside</p>
+
+<a href = "basicWidgets.html"> Next! </a>
